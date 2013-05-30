@@ -4,7 +4,8 @@ RedditOnRails::Application.routes.draw do
 
   # adds standard routes
   resources :pages
-  resources :link
+  resources :links
+  resources :comments
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

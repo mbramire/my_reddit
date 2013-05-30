@@ -1,2 +1,11 @@
 <h1>Check it!</h1>
 
+
+<ul>
+  <% @links.each do |link| %>
+    <li><h3><%= link_to link.title, link.url %></h2><%= link.url %> | <%= link_to "comments", link %></li>
+  <% end %>
+</ul> 
+<%= will_paginate @links %>
+
+<%= link_to "Add a link", new_link_path %>
