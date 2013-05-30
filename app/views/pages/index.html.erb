@@ -3,7 +3,20 @@
 
 <ul>
   <% @links.each do |link| %>
-    <li><h3><%= link_to link.title, link.url %></h2><%= link.url %> | <%= link_to "comments", link %></li>
+    <li><h3><%= link_to link.title, link.url %></h2><%= link.url %> 
+    	| <%= link_to "comments", link %></li>
+    	<% if current_user && current_user.votes.where(:link_id => link.id, :up => true).present? %>
+        + (<%= link.votes.where(:up => true).count %>)
+      <% else %>
+        <%= link_to "+", votes_path(:vote => {:link_id => link.id, :up => true}), :method => :post %> (<%= link.votes.where(:up => true).count %>)
+      <% end %>
+    	 or 
+    	<% if current_user && current_user.votes.where(:link_id => link.id, :up => false).present? %>
+    	 - (<%= link.votes.where(:up => false).count %>)
+    	<% else %>
+    	<%= link_to "-", votes_path(:vote => {:link_id => link.id, :up => false}), :method => :post %> (<%= link.votes.where(:up => false).count %>)
+    	<% end %>
+    	<br />total votes: <%= link.votes.where(:up => true).count + link.votes.where(:up => false).count %>
   <% end %>
 </ul> 
 <%= will_paginate @links %>
