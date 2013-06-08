@@ -1,3 +1,4 @@
+<h1><%= @link.title %></h1>
 <h2>Comments:</h2>
 <div>
   <% @link.comments.each do |comment| %>
@@ -27,3 +28,10 @@
   </div>
   <%= f.hidden_field :link_id, :value => @link.id %>
 <% end %>
+
+<%= content_for :sidebar do %>
+  <%= link_to "Awesome Blog", 'http://schneems.com' %>
+<% end %>
+
+<%= content_for :body_id do %>comments_main<% end %>
+<%= content_for :body_class do %>comments<% end %>
